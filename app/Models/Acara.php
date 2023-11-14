@@ -12,7 +12,12 @@ class Acara extends Model
 {
     use HasFactory;
     protected $fillable = ['id', 'nama_acara', 'tanggal', 'lokasi'];
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    
     public function Pembicara(): HasMany {
         return $this->hasMany(Pembicara::class);
     }
+
+    
 }

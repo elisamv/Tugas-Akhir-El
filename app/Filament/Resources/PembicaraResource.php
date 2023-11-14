@@ -24,7 +24,7 @@ class PembicaraResource extends Resource
 {
     protected static ?string $model = Pembicara::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-microphone';
 
     public static function form(Form $form): Form
     {
@@ -32,12 +32,14 @@ class PembicaraResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        Select::make('nama_acara')->required(),
+                        Select::make('acara_id')
+                            ->required()
+                            ->relationship('acara', 'nama_acara'),
                         TextInput::make('nama_pembicara')->required(),
                         RichEditor::make('biografi')->required(),
                         FileUpload::make('foto')->required(), 
                     ])
-                    ->columns(2),
+                    ->columns(1),
             ]);
     }
 
@@ -45,8 +47,12 @@ class PembicaraResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nama_acara'),
-                TextColumn::make('nama_pembicara'),
+                TextColumn::make('id')
+                    ->searchable(),
+                TextColumn::make('nama_acara')
+                    ->searchable(),
+                TextColumn::make('nama_pembicara')
+                    ->searchable(),
                 ImageColumn::make('foto'),
             ])
             ->filters([

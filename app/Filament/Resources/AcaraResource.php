@@ -23,7 +23,7 @@ class AcaraResource extends Resource
 {
     protected static ?string $model = Acara::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Form $form): Form
     {
@@ -35,7 +35,7 @@ class AcaraResource extends Resource
                         DatePicker::make('tanggal')->required(),
                         TextInput::make('lokasi')->required(),
                     ])
-                    ->columns(2),
+                    ->columns(1),
             ]);
     }
 
@@ -43,15 +43,21 @@ class AcaraResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nama_acara'),
-                TextColumn::make('tanggal'),
-                TextColumn::make('lokasi'),
+                TextColumn::make('id'),
+                TextColumn::make('nama_acara')
+                    ->searchable(),
+                TextColumn::make('tanggal')
+                    ->searchable(),
+                TextColumn::make('lokasi')
+                    ->searchable(),
+                   
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
