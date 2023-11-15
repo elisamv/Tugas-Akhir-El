@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Acara;
+use App\Models\Pembicara;
 use App\Models\Peserta;
 use App\Models\Sponsor;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -14,8 +15,9 @@ class StatsOverview extends BaseWidget
     {
         return [
             Stat::make(label:'Total Acaras', value: Acara::count()),
-            Stat::make(label:'Total Sponsors', value: Sponsor::count()),
-            Stat::make(label:'Total Pesertas', value: Peserta::count())
+            Stat::make(label:'Total Pembicaras', value: Pembicara::count()),
+            Stat::make(label:'Total Pesertas', value: Peserta::count()),
+            Stat::make(label:'Total Sponsors', value: Sponsor::count())
         ];
     }
 }
